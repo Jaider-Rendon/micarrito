@@ -1,9 +1,12 @@
+<a href="">Volver</a>
+
+
 <div class="login-container">
     <h2>Iniciar sesión</h2>
   
     <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-      <input type="text" formControlName="username" placeholder="Usuario" />
-      <div *ngIf="loginForm.get('username')?.invalid && loginForm.get('username')?.touched">
+      <input type="text" formControlName="identificacion" placeholder="Identificacion:" />
+      <div *ngIf="loginForm.get('identificacion')?.invalid && loginForm.get('identificacion')?.touched">
         <small>El usuario es obligatorio</small>
       </div>
   
@@ -13,6 +16,7 @@
       </div>
   
       <button type="submit" [disabled]="loginForm.invalid">Ingresar</button>
+      <a href="/loginAdmin">Admins</a>
     </form>
   </div>
   

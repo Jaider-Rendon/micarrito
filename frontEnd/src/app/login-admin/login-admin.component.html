@@ -1,0 +1,20 @@
+<a href="">Volver</a>
+<div class="login-container">
+    <h2>Iniciar sesión Admins</h2>
+  
+    <form [formGroup]="loginAdminForm" (ngSubmit)="onSubmit()">
+      <input type="text" formControlName="username" placeholder="Usuario" />
+      <div *ngIf="loginAdminForm.get('username')?.invalid && loginAdminForm.get('username')?.touched">
+        <small>El usuario es obligatorio</small>
+      </div>
+  
+      <input type="password" formControlName="password" placeholder="Contraseña" />
+      <div *ngIf="loginAdminForm.get('password')?.invalid && loginAdminForm.get('password')?.touched">
+        <small>La contraseña es obligatoria</small>
+      </div>
+  
+      <button type="submit" [disabled]="loginAdminForm.invalid">Ingresar</button>
+    </form>
+  </div>
+  
+  
