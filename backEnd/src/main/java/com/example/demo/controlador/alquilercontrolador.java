@@ -1,5 +1,6 @@
 package com.example.demo.controlador;
 
+
 import java.time.temporal.ChronoUnit;
 import java.util.Date;
 import java.util.LinkedList;
@@ -7,13 +8,18 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.web.bind.annotation.GetMapping;
+
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.modelo.alquiler;
+
 import com.example.demo.repositorio.alquilerRepositorio;
+import com.example.demo.repositorio.usuarioRepositorio;
+import com.example.demo.repositorio.vehiculoRepositorio;
 
 @RestController
 @RequestMapping("/ver/alquiler/")
@@ -21,6 +27,11 @@ public class alquilercontrolador {
 	
 	@Autowired
 	private alquilerRepositorio repositorio;
+	@Autowired
+	private vehiculoRepositorio Repositorio1;
+	@Autowired
+	private usuarioRepositorio Repositorio2;
+	
 	
 	
 	@GetMapping("/buscarNoEntregados")
@@ -143,19 +154,5 @@ public class alquilercontrolador {
 
 	    return alq;
 	}
-
-	
-	
-	
-	
-	
-	
-
-	
-	
-	
-	
-	
-	
 	
 }
