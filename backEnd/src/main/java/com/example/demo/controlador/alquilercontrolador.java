@@ -1,5 +1,7 @@
 package com.example.demo.controlador;
 
+import java.time.temporal.ChronoUnit;
+import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
@@ -98,28 +100,49 @@ public class alquilercontrolador {
 	}
 	
 	
-	@GetMapping("/gestionarAlqui")
-	public List<Object> gestionarAlqui(@RequestParam Long numeroalquiler) {
+	@GetMapping("/gestionaralquiler")
+	public List<Object> actualizarAlquiler(@RequestParam Long id) {
 	    List<Object> alq = new LinkedList<>();
-	    Optional<alquiler> alquilerOpt = this.repositorio.findById(numeroalquiler);
+	    Optional<alquiler> alquilerOpt = this.repositorio.findById(id);
 
 	    if (alquilerOpt.isPresent()) {
 	        alquiler alquiler = alquilerOpt.get();
 
-
+	       
 	        alquiler.getVehiculo().setEstado("disponible");
 
-	        this.repositorio.deleteById(numeroalquiler);
-	        alq.add("Modificación con exito: " + numeroalquiler);
-	        alq.add("Estado del vehículo actualizado a: Disponible");
+	        
+	        Date fechaEntrega = new Date(alquiler.getFechaentre().getTime());
+	        Date fechaActual = new Date();
+	        float valorVehiculo = alquiler.getVehiculo().getValor();
+
+	       
+	        long diferenciaDias = ChronoUnit.DAYS.between(
+	            fechaEntrega.toInstant(), fechaActual.toInstant()
+	        );
+
+	       
+	        float montoAdicional = diferenciaDias * 10000;
+
+	       
+	        float valorTotal = valorVehiculo + montoAdicional;
+
+	      
+	        this.repositorio.save(alquiler);
+
+	        
+	        alq.add("Ha sido cambiado el estado del alquiler con ID: " + id);
+	        alq.add("Fecha de entrega: " + fechaEntrega);
+	        alq.add("Diferencia de días: " + diferenciaDias);
+	        alq.add("Monto adicional: " + montoAdicional);
+	        alq.add("Valor total a pagar: " + valorTotal);
 	    } else {
-	        alq.add("No se ha encontrado el alquiler: " + numeroalquiler);
+	        
+	        alq.add("No se encontró un alquiler con el ID: " + id);
 	    }
 
 	    return alq;
 	}
-	
-	//funcion en procesoasddsadsadsdasdsadas
 
 	
 	
