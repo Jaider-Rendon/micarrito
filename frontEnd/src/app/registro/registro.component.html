@@ -1,1 +1,62 @@
-<p>AJAJAJAJAJAAJAJAJAJAAJJAA</p>
+<div class="container mt-4">
+    <h2>Registro de Usuario</h2>
+    <form [formGroup]="registroForm" (ngSubmit)="onSubmit()">
+      
+      <div class="mb-3">
+        <label class="form-label">Identificación</label>
+        <input type="text" class="form-control" formControlName="identificacion" />
+      </div>
+  
+      <div class="mb-3">
+        <label class="form-label">Primer Nombre</label>
+        <input type="text" class="form-control" formControlName="nombre1" />
+      </div>
+  
+      <div class="mb-3">
+        <label class="form-label">Segundo Nombre</label>
+        <input type="text" class="form-control" formControlName="nombre2" />
+      </div>
+  
+      <div class="mb-3">
+        <label class="form-label">Primer Apellido</label>
+        <input type="text" class="form-control" formControlName="apellido1" />
+      </div>
+  
+      <div class="mb-3">
+        <label class="form-label">Segundo Apellido</label>
+        <input type="text" class="form-control" formControlName="apellido2" />
+      </div>
+  
+      <div class="mb-3">
+        <label class="form-label">Fecha de Expedición de Licencia</label>
+        <input type="date" class="form-control" formControlName="fechaExpedicion" />
+      </div>
+  
+      <div class="mb-3">
+        <label class="form-label">Teléfono</label>
+        <input type="text" class="form-control" formControlName="telefono" />
+      </div>
+  
+      <div class="mb-3">
+        <label class="form-label">Vigencia Licencia</label>
+        <input type="date" class="form-control" formControlName="vigencialicencia" />
+      </div>
+  
+      <div class="mb-3">
+        <label class="form-label">Categoría</label>
+        <input type="text" class="form-control" formControlName="categoria" />
+      </div>
+  
+      <div class="mb-3">
+        <label class="form-label">Correo</label>
+        <input type="email" class="form-control" formControlName="correo" />
+      </div>
+  
+      <div class="mb-3">
+        <label class="form-label">Clave de Usuario</label>
+        <input type="password" class="form-control" formControlName="claveUsuario" />
+      </div>
+  
+      <button type="submit" class="btn btn-primary">Registrar</button>
+    </form>
+  </div>
