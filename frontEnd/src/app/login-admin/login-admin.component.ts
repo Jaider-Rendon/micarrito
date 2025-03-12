@@ -41,7 +41,7 @@ loginAdminForm: FormGroup;
         alert('Datos correctos');
         this.router.navigate(['/admins']);
       }else {
-        alert("Datos incorrectos");
+        alert("Datos incorrectos"); 
       }
     });
 
