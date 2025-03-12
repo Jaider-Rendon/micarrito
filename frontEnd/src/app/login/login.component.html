@@ -2,8 +2,6 @@
 
 <div class="login-container">
     <h2>Iniciar sesión</h2>
-    
-  
     <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
       <input type="text" formControlName="identificacion" placeholder="Identificacion:" />
       <div *ngIf="loginForm.get('identificacion')?.invalid && loginForm.get('identificacion')?.touched">
