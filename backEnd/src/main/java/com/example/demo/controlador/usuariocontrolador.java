@@ -20,7 +20,8 @@ import com.example.demo.repositorio.usuarioRepositorio;
 
 @RestController
 @RequestMapping("/ver/usuarios/")
-@CrossOrigin(origins = "http://localhost:4200/")
+@CrossOrigin(origins = "http://localhost:4200")
+
 public class usuariocontrolador {
 	
 	@Autowired

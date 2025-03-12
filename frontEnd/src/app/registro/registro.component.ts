@@ -16,8 +16,12 @@ import { error } from 'console';
 })
 export class RegistroComponent implements OnInit {
   registroForm!: FormGroup; 
+<<<<<<< HEAD
+  Usuario:Registro=new Registro();
+=======
   suario:Registro=new Registro
   Usuario:Usuario=new Usuario
+>>>>>>> origin/main
 
 
   ngOnInit():void {

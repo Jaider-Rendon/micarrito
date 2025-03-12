@@ -1,3 +1,6 @@
+
+
+
 .login-container {
     width: 300px;
     margin: 50px auto;
@@ -29,4 +32,13 @@
   button:disabled {
     background: #ccc;
   }
+
+  .btn-admin {
+    background: rgb(22, 113, 173) !important; /* Se usa !important para sobrescribir la regla global */
+    width: 30% !important;
+    margin-top: 5px;
+    color: white;
+  }
+  
+  
   
