@@ -55,8 +55,12 @@ public class usuariocontrolador {
 		
 	}
 	@PostMapping("/guardarr")
-	public usuario guardarEmpleado(@RequestBody usuario e) {
-		return this.repositorio.save(e);
+	public usuario guardarEmpleado(@RequestBody usuario e) { 
+	    try {
+	        return this.repositorio.save(e);
+	    } catch (Exception ex) {
+	        return null; 
+	    }
 	}
 	
 
