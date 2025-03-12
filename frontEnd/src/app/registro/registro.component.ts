@@ -3,6 +3,7 @@ import { RegistroService } from './../servicio/registro.service';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-registro',
@@ -18,14 +19,14 @@ export class RegistroComponent implements OnInit {
 
   ngOnInit():void {
   }
-  constructor(private registroService:RegistroService) {}
+  constructor(private registroService:RegistroService,private router:Router) {}
 
   guardarRegistro(){
     this.registroService.registroempleado(this.Usuario).subscribe(dato => {
       console.log(dato);
       if (dato != null) {
         alert("Empleado Registrado");
-        window.location.reload();
+        this.router.navigate(['/navegacion'])
       } else {
         alert("Registro no guardado");
       }
