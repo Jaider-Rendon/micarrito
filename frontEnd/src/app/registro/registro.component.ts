@@ -4,6 +4,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
+import { error } from 'console';
 
 @Component({
   selector: 'app-registro',
@@ -26,10 +27,11 @@ export class RegistroComponent implements OnInit {
       console.log(dato);
       if (dato != null) {
         alert("Empleado Registrado");
-        this.router.navigate(['/navegacion'])
+        this.router.navigate(['/login'])
       } else {
         alert("Registro no guardado");
       }
-    });
+    } ,error => {
+      alert("error faltan datos");});
   }
 }
