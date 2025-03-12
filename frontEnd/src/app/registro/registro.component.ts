@@ -1,3 +1,4 @@
+import { Usuario } from './../entidad/usuario';
 import { Registro } from './../entidad/registro';
 import { RegistroService } from './../servicio/registro.service';
 import { Component, OnInit } from '@angular/core';
@@ -15,7 +16,8 @@ import { error } from 'console';
 })
 export class RegistroComponent implements OnInit {
   registroForm!: FormGroup; 
-  Usuario:Registro=new Registro
+  suario:Registro=new Registro
+  Usuario:Usuario=new Usuario
 
 
   ngOnInit():void {
