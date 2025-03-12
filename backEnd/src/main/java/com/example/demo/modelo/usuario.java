@@ -112,12 +112,12 @@ public class usuario {
 		this.apellido2 = apellido2;
 	}
 
-	public Date getFechaEclicen() {
+	public Date getFechaExlicen() {
 		return fechaExlicen;
 	}
 
-	public void setFechaEclicen(Date fechaEclicen) {
-		this.fechaExlicen = fechaEclicen;
+	public void setFechaEclicen(Date fechaExlicen) {
+		this.fechaExlicen = fechaExlicen;
 	}
 
 	public Long getTelefono() {
