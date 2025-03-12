@@ -14,7 +14,7 @@ import { Router } from '@angular/router';
 })
 export class RegistroComponent implements OnInit {
   registroForm!: FormGroup; 
-  Usuario:Registro=new Registro
+  Usuario:Registro=new Registro();
 
 
   ngOnInit():void {

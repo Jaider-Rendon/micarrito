@@ -7,7 +7,3 @@ bootstrapApplication(AppComponent, appConfig)
 
 
 
-  import { LoginComponent } from './app/login/login.component';
-
-bootstrapApplication(LoginComponent)
-  .catch(err => console.error(err));

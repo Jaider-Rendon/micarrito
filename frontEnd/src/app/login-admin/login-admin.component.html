@@ -1,20 +1,12 @@
-<a href="">Volver</a>
 <div class="login-container">
-    <h2>Iniciar sesión Admins</h2>
+    <h2>Iniciar Sesión</h2>
+    <form [formGroup]="loginForm">
+      <label for="usuario">Usuario:</label>
+      <input type="text" id="usuario" formControlName="usuario" required>
   
-    <form [formGroup]="loginAdminForm" (ngSubmit)="onSubmit()">
-      <input type="text" formControlName="username" placeholder="Usuario" />
-      <div *ngIf="loginAdminForm.get('username')?.invalid && loginAdminForm.get('username')?.touched">
-        <small>El usuario es obligatorio</small>
-      </div>
+      <label for="clavead">Contraseña:</label>
+      <input type="password" id="clavead" formControlName="clavead" required>
   
-      <input type="password" formControlName="password" placeholder="Contraseña" />
-      <div *ngIf="loginAdminForm.get('password')?.invalid && loginAdminForm.get('password')?.touched">
-        <small>La contraseña es obligatoria</small>
-      </div>
-  
-      <button type="submit" [disabled]="loginAdminForm.invalid">Ingresar</button>
+      <button type="button" (click)="validarLoginAd()">Ingresar</button>
     </form>
   </div>
-  
-  
