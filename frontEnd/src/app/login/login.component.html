@@ -1,6 +1,7 @@
+
 <a href="">Volver</a>
 
-<div class="login-container">
+<div class="login-container" id="ver">
     <h2>Iniciar sesión</h2>
     <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
       <input type="text" formControlName="identificacion" placeholder="Identificacion:" />
@@ -14,7 +15,7 @@
       </div>
   
       <button type="submit" [disabled]="loginForm.invalid">Ingresar</button>
-      <a href="/loginAdmin">Admins</a>
+      <button class=" btn button-container" (click)="admi()">administrador</button>
     </form>
   </div>
   
