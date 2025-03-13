@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Alquiler } from '../entidad/alquiler';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-administrador',
@@ -12,10 +13,10 @@ import { Alquiler } from '../entidad/alquiler';
   styleUrls: ['./administrador.component.css'] // Corrección en `styleUrls`
 })
 export class AdministradorComponent implements OnInit {
-  
+  ver:boolean
   alquiler: Alquiler[] = []; 
 
-  constructor(private administradorService: AdministradorService) {}
+  constructor(private administradorService: AdministradorService,private router:Router) {}
 
   ngOnInit(): void {
     this.verDisponibles();
@@ -40,5 +41,12 @@ export class AdministradorComponent implements OnInit {
       console.log(dato);
       window.location.reload();
     });
+}
+goku(){
+  this.ver = false;
+    this.router.navigate(['./alquiler'])
+}
+vegueta(){
+    this.router.navigate(['./usuarios'])
 }
 }

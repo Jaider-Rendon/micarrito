@@ -11,6 +11,8 @@
     </div>
   </div>
 </div>
+<div><button (click)="goku()">gestionar alquiler</button></div>
+<div><button (click)="vegueta()">ver disponibles</button></div>
 
 <div class="container mt-4">
   <div class="table-responsive">
@@ -22,9 +24,6 @@
           <th>N° Identificación</th>
           <th>Fecha Solicitud</th>
           <th>Placa</th>
-          <th>estado alquiler</th>
-          <th>estado auto</th>
-          <th>actualizar</th>
         </tr>
       </thead>
       <tbody>
@@ -34,12 +33,6 @@
           <td>{{ item.usuario.nIdentificacion }}</td>
           <td>{{ item.fechasoli | date:'longDate' }}</td>
           <td class="fw-bold text-uppercase">{{ item.vehiculo.placa }}</td>
-          <td>{{item.estadoalqui}}</td>
-          <td>{{item.vehiculo.estado}}</td>
-          <td><button type="button" (click)="actualizar( item.vehiculo.placa.toString())"> Actualizar </button></td>
-          
-
-
         </tr>
       </tbody>
     </table>

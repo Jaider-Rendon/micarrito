@@ -10,6 +10,7 @@ import { Alquiler } from '../entidad/alquiler';
 export class AdministradorService {
 
   private bdurl = "http://localhost:8080/ver/alquiler/noentregado";
+  private bdurll = "http://localhost:8080/ver/alquiler/todos";
 
   constructor(private httpClient: HttpClient) { }
 
@@ -22,5 +23,9 @@ export class AdministradorService {
   ):Observable<any>{
 return this.httpClient.get(`http://localhost:8080/ver/alquiler/actualizar?placa=${placa}`)
   }
+
+  obtenerTodos(): Observable<Alquiler[]> {
+      return this.httpClient.get<Alquiler[]>(this.bdurll);
+    }
 }
 
