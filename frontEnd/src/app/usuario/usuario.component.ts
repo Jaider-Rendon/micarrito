@@ -20,20 +20,24 @@ export class UsuarioComponent implements OnInit {
   }
 
   constructor(private vehiculoService: VehiculoService) {}
-
-verDisponibles() {
+  verDisponibles() {
     this.vehiculoService.disponibles(this.tipo).subscribe(datos => {
         console.log('Datos recibidos:', datos);
 
-        // Si datos no es un array, lo convertimos en uno
-        if (!Array.isArray(datos)) {
-            this.vehiculos = [datos]; // Lo convertimos en un array
+        if (!datos || (Array.isArray(datos) && datos.length === 0)) {
+            alert("No hay vehículos disponibles para este tipo.");
+            this.vehiculos = []; 
+        } else if (!Array.isArray(datos)) {
+            this.vehiculos = [datos]; 
         } else {
-            this.vehiculos = datos;
+            this.vehiculos = datos; 
         }
-    });
+      }, error => {
+        console.error("Error en la solicitud:", error);
+        alert("Error al obtener los datos. Verifica la conexión con el servidor.");
+      }
+    );
 }
-  
 
 }
 
