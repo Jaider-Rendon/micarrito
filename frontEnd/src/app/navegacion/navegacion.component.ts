@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { Router } from '@angular/router';
 
@@ -10,12 +10,14 @@ import { Router } from '@angular/router';
   templateUrl: './navegacion.component.html',
   styleUrl: './navegacion.component.css'
 })
-export class NavegacionComponent {
+export class NavegacionComponent implements OnInit {
 ver: boolean
 
 constructor(private router:Router){
  this.ver = true;
 }  
+  ngOnInit(): void {
+  }
 
 
   abrirsesion(){

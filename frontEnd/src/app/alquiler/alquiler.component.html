@@ -1,1 +1,48 @@
-<p>alquiler works!</p>
+<p class="h2 text-center text-primary fw-bold mt-4">
+    🚗 Lista de Vehículos No Entregados
+  </p>
+  
+  <div class="container mt-4">
+    <div class="row justify-content-center">
+      <div class="col-md-8">
+        <label for="tipo" class="form-label fw-bold text-secondary">
+          📌 Gestionar Alquiler":
+        </label>
+      </div>
+    </div>
+  </div>
+  <div class="container mt-4">
+    <div class="table-responsive">
+      <table class="table table-hover table-bordered shadow-lg rounded">
+        <thead class="table-dark text-center">
+          <tr>
+            <th># Alquiler</th>
+            <th>Valor Alquiler</th>          
+            <th>N° Identificación</th>
+            <th>Fecha Solicitud</th>
+            <th>Placa</th>
+            <th>estado alquiler</th>
+            <th>estado auto</th>
+            <th>actualizar</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of alquiler" class="text-center align-middle table-light">
+            <td><strong>{{ item.numeroalquiler }}</strong></td>
+            <td class="text-success fw-bold">${{ item.valoralquiler | number }}</td>
+            <td>{{ item.usuario.nIdentificacion }}</td>
+            <td>{{ item.fechasoli | date:'longDate' }}</td>
+            <td class="fw-bold text-uppercase">{{ item.vehiculo.placa }}</td>
+            <td>{{item.estadoalqui}}</td>
+            <td>{{item.vehiculo.estado}}</td>
+            <td><button type="button" (click)="actualizar( item.vehiculo.placa.toString())"> Actualizar </button></td>
+            
+  
+  
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  
+  

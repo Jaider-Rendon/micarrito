@@ -1,4 +1,5 @@
-import { Vehiculo } from "../vehiculo";
+import { Vehiculos } from './vehiculos';
+
 import { LoginAdmin } from "./login-admin";
 import { Usuario } from "./usuario";
 
@@ -9,7 +10,7 @@ export class Alquiler {
     valoralquiler:number;
     estadoalqui:string;
     fechaalquiler:string;
-    placa:Vehiculo;
-    nIdentificacion:Usuario;
+    vehiculo:Vehiculos;
+    usuario:Usuario;
     loginAdmi:LoginAdmin;
 }

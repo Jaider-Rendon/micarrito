@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,13 +16,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.modelo.alquiler;
-
+import com.example.demo.modelo.vehiculo;
 import com.example.demo.repositorio.alquilerRepositorio;
 import com.example.demo.repositorio.usuarioRepositorio;
 import com.example.demo.repositorio.vehiculoRepositorio;
 
 @RestController
 @RequestMapping("/ver/alquiler/")
+@CrossOrigin(origins = "http://localhost:4200")
 public class alquilercontrolador {
 	
 	@Autowired
@@ -67,13 +68,6 @@ public class alquilercontrolador {
 	            String estadO = Ac.get(i).getEstadoalqui();
 	            Ac.get(i).setEstadoalqui("entregado");
 	            this.repositorio.save(Ac.get(i));
-
-	            String estado = Ac.get(i).getEstadoalqui();
-	            String tipo = Ac.get(i).getVehiculo().getTipovehiculo();
-	            alqA.add("Estado original: " + estadO);
-	            alqA.add("Placa: " + Placa);
-	            alqA.add("Estado: " + estado);
-	            alqA.add("tipo: " + tipo);
 	            return alqA;
 	        } else {
 	            alqA.add("No se encontraron vehículos relacionados con la placa: " + placa);
@@ -154,5 +148,15 @@ public class alquilercontrolador {
 
 	    return alq;
 	}
+	@GetMapping("/noentregado")
+	public List<alquiler> disponible() {
+	    return this.repositorio.findByEstado("no entregado");
+	}
 	
+	@GetMapping("/todos")
+	public List<alquiler> obtenerTodosLosAlquileres() {
+	    return this.repositorio.findAll();
+	}
+	
+
 }
