@@ -38,7 +38,7 @@ loginAdminForm: FormGroup;
     this.loginAdminSer.login(usuario, clavead).subscribe(dato => {
       console.log(dato);
       if (dato === true) {
-        alert('Datos correctos');
+ 
         this.router.navigate(['/admins']);
       }else {
         alert("Datos incorrectos"); 
