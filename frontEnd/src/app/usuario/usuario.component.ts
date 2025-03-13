@@ -26,11 +26,11 @@ export class UsuarioComponent implements OnInit {
 
         if (!datos || (Array.isArray(datos) && datos.length === 0)) {
             alert("No hay vehículos disponibles para este tipo.");
-            this.vehiculos = []; // Aseguramos que la lista quede vacía
+            this.vehiculos = []; 
         } else if (!Array.isArray(datos)) {
             this.vehiculos = [datos]; 
         } else {
-            this.vehiculos = datos; // Asigna los datos correctamente si es un array válido
+            this.vehiculos = datos; 
         }
       }, error => {
         console.error("Error en la solicitud:", error);
