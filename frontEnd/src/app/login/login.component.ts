@@ -23,6 +23,10 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {}
 
+  admi(){
+    this.router.navigate(['./loginAdmin'])
+  }
+
   validarLogin() {
     if (this.loginForm.invalid) {
       alert('Por favor completa todos los campos.');

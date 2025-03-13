@@ -1,11 +1,28 @@
-<form [formGroup]="loginForm" (ngSubmit)="validarLogin()">
-    <label for="nIdentificacion">Identificación:</label>
-    <input id="nIdentificacion" formControlName="nIdentificacion" type="text" required />
-  
-    <label for="claveUs">Contraseña:</label>
-    <input id="claveUs" formControlName="claveUs" type="password" required />
-  
-    <button type="submit">Iniciar sesión</button>
-  </form>
-  
-  <a href="">Volver</a>
+<div class="container d-flex justify-content-center align-items-center vh-100">
+  <div class="form-container border p-4 rounded">
+    <h2 class="text-center mb-4">Iniciar Sesión</h2>
+
+    <form [formGroup]="loginForm">
+      <div class="mb-3">
+        <label for="nIdentificacion" class="form-label">Identificación:</label>
+        <input id="nIdentificacion" formControlName="nIdentificacion" type="text" 
+               class="form-control" required />
+      </div>
+      
+      <div class="mb-3">
+        <label for="claveUs" class="form-label">Contraseña:</label>
+        <input id="claveUs" formControlName="claveUs" type="password" 
+               class="form-control" required />
+      </div>
+
+      <button type="submit" class="btn btn-primary btn-custom" (click)="validarLogin()">Iniciar sesión</button>
+      
+    </form>
+
+    <div class="text-center mt-3">
+      <button type="submit" class="btn btn-primary btn-primary" (click)="admi()">Iniciar admi</button>
+      
+    </div>
+  </div>
+</div>
+<a href="#" class="text-decoration-none">Volver</a>
