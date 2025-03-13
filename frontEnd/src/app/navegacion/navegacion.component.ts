@@ -24,6 +24,7 @@ constructor(private router:Router){
 
   }
   Registro(){
+    this.ver=false;
     this.router.navigate(['./register'])
   }
 
