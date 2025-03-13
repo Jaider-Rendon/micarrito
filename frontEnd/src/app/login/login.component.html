@@ -1,2 +1,11 @@
-
-<a href="">Volver</a>
+<form [formGroup]="loginForm" (ngSubmit)="validarLogin()">
+    <label for="nIdentificacion">Identificación:</label>
+    <input id="nIdentificacion" formControlName="nIdentificacion" type="text" required />
+  
+    <label for="claveUs">Contraseña:</label>
+    <input id="claveUs" formControlName="claveUs" type="password" required />
+  
+    <button type="submit">Iniciar sesión</button>
+  </form>
+  
+  <a href="">Volver</a>
