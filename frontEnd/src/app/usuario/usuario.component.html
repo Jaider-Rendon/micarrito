@@ -1,1 +1,32 @@
-<p>usuario works!</p>
+<p>Lista de vehículos</p>
+<div class="container">
+  <label for="tipo">Tipo de Vehiculo</label>
+<select >
+      <option value="automovil">Automovil</option>
+      <option value="camioneta">Camioneta</option>
+      <option value="campero">Campero</option>
+      <option value="microbus">Microbus</option>
+      <option value="motocicleta">Motocicleta</option>
+  </select>
+</div>
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th>Placa</th>
+      <th>Color</th>
+      <th>Valor</th>
+      <th>estado</th>
+      <th>tipo</th>
+    </tr>
+  </thead>
+ <tbody>
+  <tr *ngFor="let item of vehiculos">
+    <td>{{item.placa}}</td>
+    <td>{{item.color}}</td>
+    <td>{{item.valorVehiculo}}</td>
+    <td>{{item.estado}}</td>
+    <td>{{item.tipo}}</td>
+  </tr>
+</tbody>
+
+</table>
