@@ -1,13 +1,23 @@
-<div class="home-container" *ngIf="ver">
-    <h1>Bienvenido a Mi Cacharrito</h1>
-    <div class="button-container">
-      <button class="btn btn-primary" (click)="abrirsesion()">Iniciar sesión</button>
-      <button class="btn btn-primary" (click)="Registro()">Registrarse</button>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm">
+  <div class="container">
+    <a class="navbar-brand fw-bold" href="#">
+      🚗 Mi Cacharrito
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ms-auto">
+  
+        <li *ngIf="ver" class="nav-item">
+          <button class="btn btn-outline-light me-2" (click)="abrirsesion()">🔑 Iniciar Sesión</button>
+        </li>
+        <li *ngIf="ver" class="nav-item">
+          <button class="btn btn-success" (click)="Registro()">📝 Registrarse</button>
+        </li>
+      </ul>
     </div>
   </div>
+</nav>
 
-  <router-outlet></router-outlet>
-
- 
-  
-  
+<router-outlet></router-outlet>

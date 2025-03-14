@@ -1,18 +1,29 @@
+<div class="col-md-4 text-start">
+  <button class="btn btn-info" (click)="regresar()">🔙 </button>
+</div>
 <p class="h2 text-center text-primary fw-bold mt-4">
   🚗 Lista de Vehículos No Entregados
 </p>
 
 <div class="container mt-4">
   <div class="row justify-content-center">
-    <div class="col-md-8">
+    <div class="col-md-8 text-center">
       <label for="tipo" class="form-label fw-bold text-secondary">
-        📌 Vehículos en estado "No Entregado":
+        📌 Vehículos en estado <span class="text-danger">"No Entregado"</span>:
       </label>
     </div>
   </div>
 </div>
-<div><button (click)="goku()">gestionar alquiler</button></div>
-<div><button (click)="vegueta()">ver disponibles</button></div>
+
+
+<div class="container text-center mt-3">
+  <button class="btn btn-warning btn-lg me-2" (click)="goku()">
+    📝 Gestionar Alquiler
+  </button>
+  <button class="btn btn-success btn-lg" (click)="vegueta()">
+    ✅ Ver Disponibles
+  </button>
+</div>
 
 <div class="container mt-4">
   <div class="table-responsive">
@@ -20,7 +31,7 @@
       <thead class="table-dark text-center">
         <tr>
           <th># Alquiler</th>
-          <th>Valor Alquiler</th>          
+          <th>Valor Alquiler</th>
           <th>N° Identificación</th>
           <th>Fecha Solicitud</th>
           <th>Placa</th>
@@ -38,4 +49,3 @@
     </table>
   </div>
 </div>
-

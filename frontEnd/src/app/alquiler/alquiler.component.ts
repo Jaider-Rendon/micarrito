@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { Alquiler } from '../entidad/alquiler';
 import { AdministradorService } from '../servicio/administrador.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-alquiler',
@@ -15,7 +16,7 @@ export class AlquilerComponent implements OnInit {
   ver: boolean = false; // Inicializado en false para evitar errores
   alquiler: Alquiler[] = []; 
 
-  constructor(private administradorService: AdministradorService) {}
+  constructor(private administradorService: AdministradorService,private router:Router) {}
 
   ngOnInit(): void {
     this.verDisponibles();
@@ -39,7 +40,17 @@ export class AlquilerComponent implements OnInit {
       window.location.reload();
     });
   }
+  calcular(placaa: number) {
+    this.administradorService.calcular(placaa).subscribe(dato => {
+      console.log(dato);
+      window.location.reload();
+    });
+  }
+  regresar(){
+    this.router.navigate(['./admins'])
+  }
 }
+
 
 
 

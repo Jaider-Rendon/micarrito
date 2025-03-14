@@ -28,13 +28,10 @@ export class AdministradorComponent implements OnInit {
       (datos) => {
         console.log('Datos recibidos:', datos);
         this.alquiler = Array.isArray(datos) ? datos : [datos];
-      },
-      (error) => {
-        console.error('Error al obtener los datos:', error);
-        alert('todos los autos han sido entregado');
-      }
-    );
-  }
+      },error => {
+        console.error('Error en la solicitud:', error);
+        alert('Ocurrió un error al intentar iniciar sesión.');}
+    ); ;}
   actualizar(placa: string) {
     this.administradorService.gestionar(placa).subscribe(dato => {
       alert(dato);
@@ -47,6 +44,9 @@ goku(){
     this.router.navigate(['./alquiler'])
 }
 vegueta(){
-    this.router.navigate(['./usuarios'])
+    this.router.navigate(['./auto'])
+}
+regresar(){
+  this.router.navigate(["./loginAdmin"])
 }
 }

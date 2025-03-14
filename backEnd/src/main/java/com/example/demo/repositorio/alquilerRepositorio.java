@@ -14,5 +14,9 @@ import com.example.demo.modelo.alquiler;
 public interface alquilerRepositorio extends JpaRepository <alquiler,Long>{
 	@Query(value = "SELECT * FROM alquiler v WHERE v.estadoalqui = :estado", nativeQuery = true)
 	List<alquiler> findByEstado(@Param("estado") String estado);
-
+	
+	@Query(value = "SELECT * FROM alquiler v WHERE v.n_identificacion = :estado", nativeQuery = true)
+	List<alquiler> findBycedula(@Param("estado") Long estado);
+	
+	
 }

@@ -1,20 +1,19 @@
-import { routes } from './../app.routes';
-import { Component, OnInit } from '@angular/core';
-import { VehiculoService } from '../servicio/vehiculo.service';
-import { Vehiculos } from '../entidad/vehiculos';
-import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
-
+import { CommonModule } from '@angular/common';
+import { Component, OnInit } from '@angular/core';
+import { Vehiculos } from '../entidad/vehiculos';
+import { VehiculoService } from '../servicio/vehiculo.service';
+import { FormsModule } from '@angular/forms';
 
 @Component({
-  selector: 'app-usuario',
+  selector: 'app-auto',
   standalone: true,
   imports: [CommonModule,FormsModule],
-  templateUrl: './usuario.component.html',
-  styleUrl: './usuario.component.css'
+  templateUrl: './auto.component.html',
+  styleUrl: './auto.component.css'
 })
-export class UsuarioComponent implements OnInit {
+
+export class AutoComponent implements OnInit {
 
   vehiculos:Vehiculos[];
   tipo:string;
@@ -41,14 +40,8 @@ export class UsuarioComponent implements OnInit {
       }
     );
 }
-
-veralquileres(){
-  this.router.navigate(['./alquilados'])
- 
-}
 regresar(){
-  this.router.navigate(["./login"])
-
+  this.router.navigate(['./admins'])
 }
 
 }
