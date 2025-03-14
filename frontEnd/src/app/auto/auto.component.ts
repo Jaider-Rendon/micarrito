@@ -1,27 +1,27 @@
-import { routes } from './../app.routes';
-import { Component, OnInit } from '@angular/core';
-import { VehiculoService } from '../servicio/vehiculo.service';
-import { Vehiculos } from '../entidad/vehiculos';
-import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
+import { CommonModule } from '@angular/common';
+import { Component, OnInit } from '@angular/core';
+import { Vehiculos } from '../entidad/vehiculos';
+import { VehiculoService } from '../servicio/vehiculo.service';
+import { FormsModule } from '@angular/forms';
 
 @Component({
-  selector: 'app-usuario',
+  selector: 'app-auto',
   standalone: true,
-  imports: [CommonModule, FormsModule],
-  templateUrl: './usuario.component.html',
-  styleUrl: './usuario.component.css'
+  imports: [CommonModule,FormsModule],
+  templateUrl: './auto.component.html',
+  styleUrl: './auto.component.css'
 })
-export class UsuarioComponent implements OnInit {
 
-  vehiculos: Vehiculos[];
-  tipo: string;
+export class AutoComponent implements OnInit {
 
-  constructor(private vehiculoService: VehiculoService, private router: Router) {}
+  vehiculos:Vehiculos[];
+  tipo:string;
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+  }
 
+  constructor(private vehiculoService: VehiculoService, private router:Router) {}
   verDisponibles() {
     this.vehiculoService.disponibles(this.tipo).subscribe(datos => {
         console.log('Datos recibidos:', datos);
@@ -39,18 +39,10 @@ export class UsuarioComponent implements OnInit {
         alert("Error al obtener los datos. Verifica la conexión con el servidor.");
       }
     );
-  }
-
-  irASolicitarAlquiler() {
-    this.router.navigate(['/solicitar-alquiler']);
-  }
-
-  veralquileres() {
-    this.router.navigate(['./alquilados']);
-  }
-
-  regresar() {
-    this.router.navigate(["./login"]);
-  }
+}
+regresar(){
+  this.router.navigate(['./admins'])
+}
 
 }
+

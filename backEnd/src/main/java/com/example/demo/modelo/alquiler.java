@@ -2,15 +2,14 @@ package com.example.demo.modelo;
 
 import java.util.Date;
 import jakarta.persistence.*;
-
 import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 @Table(name = "alquiler")
-public class alquiler {
-    
+public class Alquiler {
+
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY) // 
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "numeroalquiler")
     private Long numeroalquiler;
 
@@ -37,21 +36,24 @@ public class alquiler {
 
     @ManyToOne
     @JoinColumn(name = "placa", referencedColumnName = "placa")
-    private vehiculo vehiculo;
+    private Vehiculo vehiculo;
 
     @ManyToOne
     @JoinColumn(name = "nIdentificacion", referencedColumnName = "nIdentificacion")
-    private usuario usuario;
+    private Usuario usuario;
 
     @ManyToOne
     @JoinColumn(name = "codigoadmi", referencedColumnName = "codigoadmi")
-    private loginAdmi loginAdmi;
+    private LoginAdmi loginAdmi;
 
-    public alquiler() {
+    // Constructor vacío
+    public Alquiler() {
     }
 
-    public alquiler(Date fechasoli, Date fechaentre, Float valoralquiler, String estadoalqui,
-                    Date fechaalquiler, vehiculo vehiculo, usuario usuario, loginAdmi loginAdmi) {
+    // Constructor con parámetros
+    public Alquiler(Long numeroalquiler, Date fechasoli, Date fechaentre, Float valoralquiler, String estadoalqui,
+                    Date fechaalquiler, Vehiculo vehiculo, Usuario usuario, LoginAdmi loginAdmi) {
+        this.numeroalquiler = numeroalquiler;
         this.fechasoli = fechasoli;
         this.fechaentre = fechaentre;
         this.valoralquiler = valoralquiler;
@@ -62,8 +64,13 @@ public class alquiler {
         this.loginAdmi = loginAdmi;
     }
 
+    // Getters y Setters
     public Long getNumeroalquiler() {
         return numeroalquiler;
+    }
+
+    public void setNumeroalquiler(Long numeroalquiler) {
+        this.numeroalquiler = numeroalquiler;
     }
 
     public Date getFechasoli() {
@@ -106,27 +113,27 @@ public class alquiler {
         this.fechaalquiler = fechaalquiler;
     }
 
-    public vehiculo getVehiculo() {
+    public Vehiculo getVehiculo() {
         return vehiculo;
     }
 
-    public void setVehiculo(vehiculo vehiculo) {
+    public void setVehiculo(Vehiculo vehiculo) {
         this.vehiculo = vehiculo;
     }
 
-    public usuario getUsuario() {
+    public Usuario getUsuario() {
         return usuario;
     }
 
-    public void setUsuario(usuario usuario) {
+    public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
     }
 
-    public loginAdmi getAdministrador() {
+    public LoginAdmi getLoginAdmi() {
         return loginAdmi;
     }
 
-    public void setAdministrador(loginAdmi loginAdmi) {
+    public void setLoginAdmi(LoginAdmi loginAdmi) {
         this.loginAdmi = loginAdmi;
     }
 }

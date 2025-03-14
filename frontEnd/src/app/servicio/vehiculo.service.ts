@@ -8,6 +8,7 @@ import { Vehiculos } from '../entidad/vehiculos';
 })
 export class VehiculoService {
   private bdurl = "http://localhost:8080/ver/vehiculo/buscartipodisponible";
+  private bdurll = "http://localhost:8080/ver/alquiler/todos";
 
   constructor(private httpClient: HttpClient) { }
   
@@ -15,5 +16,9 @@ export class VehiculoService {
     const params = new HttpParams().set('tipo', tipo);
 
     return this.httpClient.get<Vehiculos[]>(`${this.bdurl}`, { params });
+  }
+
+  obtenerTodos(): Observable<Vehiculos[]> {
+    return this.httpClient.get<Vehiculos[]>(this.bdurll);
   }
 }

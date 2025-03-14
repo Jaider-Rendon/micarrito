@@ -1,32 +1,33 @@
+import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
-import { Router } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { Router, RouterOutlet, NavigationEnd } from '@angular/router';
 
 @Component({
   selector: 'app-navegacion',
   standalone: true,
-  imports: [RouterOutlet,CommonModule],
+  imports: [CommonModule, RouterOutlet, FormsModule], 
   templateUrl: './navegacion.component.html',
   styleUrl: './navegacion.component.css'
 })
-export class NavegacionComponent {
-ver: boolean
+export class NavegacionComponent implements OnInit {
+  ver: boolean = true;
 
-constructor(private router:Router){
- this.ver = true;
-}  
+  constructor(private router: Router) {}
 
-
-  abrirsesion(){
-    this.ver = false;
-    this.router.navigate(['./login'])
-
-  }
-  Registro(){
-    this.ver=false;
-    this.router.navigate(['./register'])
+  ngOnInit(): void {
+    this.router.events.subscribe(event => {
+      if (event instanceof NavigationEnd) {
+        this.ver = this.router.url === '/';
+      }
+    });
   }
 
+  abrirsesion() {
+    this.router.navigate(['/login']);
+  }
+
+  Registro() {
+    this.router.navigate(['/register']);
+  }
 }
-

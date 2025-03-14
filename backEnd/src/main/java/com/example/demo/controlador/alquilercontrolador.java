@@ -1,6 +1,5 @@
 package com.example.demo.controlador;
 
-
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.time.temporal.ChronoUnit;
@@ -30,186 +29,144 @@ import com.example.demo.repositorio.vehiculoRepositorio;
 @RequestMapping("/ver/alquiler/")
 @CrossOrigin(origins = "http://localhost:4200")
 public class alquilercontrolador {
-	
-	@Autowired
-	private alquilerRepositorio repositorio;
-	@Autowired
-	private vehiculoRepositorio Repositorio1;
-	@Autowired
-	private usuarioRepositorio Repositorio2;
-	
-	
-	
-	@GetMapping("/buscarNoEntregados")
-	public List<Object>buscarNoEntregados(){
-		List<Object> vehiculosNo = new LinkedList <>();
-		List<alquiler> al = this.repositorio.findAll();
-		String estadoAl="no entregado";
-		for(int i=0;i<al.size();i++) {
-			String EstadoAl=al.get(i).getEstadoalqui();
-			if(EstadoAl.equals(estadoAl)) {
-				String placa=al.get(i).getVehiculo().getPlaca();
-				String rr=al.get(i).getUsuario().getNombre1();
-				Long rrr=al.get(i).getUsuario().getnIdentificacion();
-				
-				vehiculosNo.add("Placa: "+placa);
-				vehiculosNo.add("nombre: "+rr);
-				vehiculosNo.add("cedula: "+rrr);
-				return vehiculosNo;	
-			}	
-			
-		}
-		return vehiculosNo;		
-	}
-	
-	@GetMapping("/actualizar")
-	public List<Object> Actualizar(@RequestParam String placa) {
-	    List<Object> alqA = new LinkedList<>();
-	    List<alquiler> Ac = this.repositorio.findAll();
+    
+    @Autowired
+    private alquilerRepositorio repositorio;
+    @Autowired
+    private vehiculoRepositorio Repositorio1;
+    @Autowired
+    private usuarioRepositorio Repositorio2;
+    
+    @GetMapping("/buscarNoEntregados")
+    public List<Object> buscarNoEntregados() {
+        List<Object> vehiculosNo = new LinkedList<>();
+        List<alquiler> al = this.repositorio.findAll();
+        String estadoAl = "no entregado";
+        for (int i = 0; i < al.size(); i++) {
+            String EstadoAl = al.get(i).getEstadoalqui();
+            if (EstadoAl.equals(estadoAl)) {
+                String placa = al.get(i).getVehiculo().getPlaca();
+                String rr = al.get(i).getUsuario().getNombre1();
+                Long rrr = al.get(i).getUsuario().getnIdentificacion();
+                vehiculosNo.add("Placa: " + placa);
+                vehiculosNo.add("nombre: " + rr);
+                vehiculosNo.add("cedula: " + rrr);
+                return vehiculosNo;    
+            }    
+        }
+        return vehiculosNo;        
+    }
+    
+    @GetMapping("/actualizar")
+    public List<Object> Actualizar(@RequestParam String placa) {
+        List<Object> alqA = new LinkedList<>();
+        List<alquiler> Ac = this.repositorio.findAll();
 
-	    for (int i = 0; i < Ac.size(); i++) {
-	        String Placa = Ac.get(i).getVehiculo().getPlaca();
-	        if (Placa.equals(placa)) {
-	            String estadO = Ac.get(i).getEstadoalqui();
-	            Ac.get(i).setEstadoalqui("entregado");
-	            this.repositorio.save(Ac.get(i));
+        for (int i = 0; i < Ac.size(); i++) {
+            String Placa = Ac.get(i).getVehiculo().getPlaca();
+            if (Placa.equals(placa)) {
+                Ac.get(i).setEstadoalqui("entregado");
+                this.repositorio.save(Ac.get(i));
+                return alqA;
+            } else {
+                alqA.add("No se encontraron vehículos relacionados con la placa: " + placa);
+            }
+        }
+        return alqA;
+    }
+    
+    @GetMapping("/cancelarAlqui")
+    public List<Object> cancelar(@RequestParam Long numeroalquiler) {
+        List<Object> alq = new LinkedList<>();
+        List<alquiler> ac = this.repositorio.findAll();
+        for (int i = 0; i < ac.size(); i++) {
+            Long id = ac.get(i).getNumeroalquiler();
+            if (id.equals(numeroalquiler)) {
+                ac.get(i).getVehiculo().setEstado("disponible");
+                this.repositorio.save(ac.get(i));
+                this.repositorio.deleteById(numeroalquiler);
+            }
+            if (ac.isEmpty()) {
+                alq.add("No se encontró ningún alquiler con esta referencia " + numeroalquiler);
+            }
+        }
+        return alq;
+    }
+    
+    @GetMapping("/gestionaralquiler")
+    public List<Object> actualizarAlquiler(@RequestParam Long id) {
+        List<Object> alq = new LinkedList<>();
+        Optional<alquiler> alquilerOpt = this.repositorio.findById(id);
 
-	            String estado = Ac.get(i).getEstadoalqui();
-	            String tipo = Ac.get(i).getVehiculo().getTipovehiculo();
-	            alqA.add("Estado original: " + estadO);
-	            alqA.add("Placa: " + Placa);
-	            alqA.add("Estado: " + estado);
-	            alqA.add("tipo: " + tipo);
-	            return alqA;
-	        } else {
-	            alqA.add("No se encontraron vehículos relacionados con la placa: " + placa);
-	        }
-	    }
-	    return alqA;
-	}
+        if (alquilerOpt.isPresent()) {
+            alquiler alquiler = alquilerOpt.get();
+            alquiler.getVehiculo().setEstado("disponible");
+            Date fechaEntrega = new Date(alquiler.getFechaentre().getTime());
+            Date fechaActual = new Date();
+            float valorVehiculo = alquiler.getVehiculo().getValor();
+            long diferenciaDias = ChronoUnit.DAYS.between(
+                fechaEntrega.toInstant(), fechaActual.toInstant()
+            );
+            float montoAdicional = diferenciaDias * 10000;
+            float valorTotal = valorVehiculo + montoAdicional;
+            alquiler.setValoralquiler(valorTotal);
+            this.repositorio.save(alquiler);
+        } else {
+            alq.add("No se encontró un alquiler con el ID: " + id);
+        }
+        return alq;
+    }
+    
+    @GetMapping("/noentregado")
+    public List<alquiler> disponible() {
+        return this.repositorio.findByEstado("no entregado");
+    }
+    
+    @GetMapping("/todos")
+    public List<alquiler> obtenerTodosLosAlquileres() {
+        return this.repositorio.findAll();
+    }
+    
+    @GetMapping("/buscaralqui")
+    public List<alquiler> buscaralqui(@RequestParam Long cedula) {
+        return this.repositorio.findBycedula(cedula);
+    }
+    
+    @PostMapping("/solicitar")
+    public ResponseEntity<?> solicitarAlquiler(
+            @RequestParam Long nIdentificacion,
+            @RequestParam String placa,
+            @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date fechaInicio,
+            @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date fechaEntrega) {
 
-	
-	@GetMapping("/cancelarAlqui")
-	public List<Object> cancelar(@RequestParam Long numeroalquiler) {
-	    List<Object> alq = new LinkedList<>();
-	    Optional<alquiler> alquilerOpt = this.repositorio.findById(numeroalquiler);
+        Optional<usuario> usuarioOpt = Repositorio2.findById(nIdentificacion);
+        Optional<vehiculo> vehiculoOpt = Repositorio1.findById(placa);
 
-	    if (alquilerOpt.isPresent()) {
-	        alquiler alquiler = alquilerOpt.get();
+        if (usuarioOpt.isEmpty()) {
+            return ResponseEntity.badRequest().body("El usuario no existe.");
+        }
 
-	       
-	        if (alquiler.getEstadoalqui().equals("Finalizado")) {
-	            alq.add("No se puede cancelar un alquiler ya finalizado: " + numeroalquiler);
-	            return alq;
-	        }
+        if (vehiculoOpt.isEmpty()) {
+            return ResponseEntity.badRequest().body("El vehículo no existe.");
+        }
 
-	        alquiler.getVehiculo().setEstado("disponible");
+        vehiculo vehiculo = vehiculoOpt.get();
+        if (!"disponible".equalsIgnoreCase(vehiculo.getEstado())) {
+            return ResponseEntity.badRequest().body("El vehículo no está disponible para alquiler.");
+        }
 
-	        this.repositorio.deleteById(numeroalquiler);
+        alquiler nuevoAlquiler = new alquiler();
+        nuevoAlquiler.setUsuario(usuarioOpt.get());
+        nuevoAlquiler.setVehiculo(vehiculo);
+        nuevoAlquiler.setFechaalquiler(new Date());
+        nuevoAlquiler.setFechasoli(fechaInicio);
+        nuevoAlquiler.setFechaentre(fechaEntrega);
+        nuevoAlquiler.setValoralquiler(vehiculo.getValor());
+        nuevoAlquiler.setEstadoalqui("pendiente de entrega");
 
-	        alq.add("Ha sido cancelado el alquiler: " + numeroalquiler);
-	        alq.add("Estado del vehículo actualizado a: Disponible");
-	    } else {
-	        alq.add("No se ha encontrado el alquiler: " + numeroalquiler);
-	    }
-
-	    return alq;
-	}
-	
-	
-	@GetMapping("/gestionaralquiler")
-	public List<Object> actualizarAlquiler(@RequestParam Long id) {
-	    List<Object> alq = new LinkedList<>();
-	    Optional<alquiler> alquilerOpt = this.repositorio.findById(id);
-
-	    if (alquilerOpt.isPresent()) {
-	        alquiler alquiler = alquilerOpt.get();
-
-	       
-	        alquiler.getVehiculo().setEstado("disponible");
-
-	        
-	        Date fechaEntrega = new Date(alquiler.getFechaentre().getTime());
-	        Date fechaActual = new Date();
-	        float valorVehiculo = alquiler.getVehiculo().getValor();
-
-	       
-	        long diferenciaDias = ChronoUnit.DAYS.between(
-	            fechaEntrega.toInstant(), fechaActual.toInstant()
-	        );
-
-	       
-	        float montoAdicional = diferenciaDias * 10000;
-
-	       
-	        float valorTotal = valorVehiculo + montoAdicional;
-
-	      
-	        this.repositorio.save(alquiler);
-
-	        
-	        alq.add("Ha sido cambiado el estado del alquiler con ID: " + id);
-	        alq.add("Fecha de entrega: " + fechaEntrega);
-	        alq.add("Diferencia de días: " + diferenciaDias);
-	        alq.add("Monto adicional: " + montoAdicional);
-	        alq.add("Valor total a pagar: " + valorTotal);
-	    } else {
-	        
-	        alq.add("No se encontró un alquiler con el ID: " + id);
-	    }
-
-	    return alq;
-	}
-	
-	@PostMapping("/solicitar")
-	public ResponseEntity<?> solicitarAlquiler(
-	        @RequestParam Long nIdentificacion,
-	        @RequestParam String placa,
-	        @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date fechaInicio,
-	        @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date fechaEntrega) {
-
-	    Optional<usuario> usuarioOpt = Repositorio2.findById(nIdentificacion);
-	    Optional<vehiculo> vehiculoOpt = Repositorio1.findById(placa);
-
-	    if (usuarioOpt.isEmpty()) {
-	        return ResponseEntity.badRequest().body("El usuario no existe.");
-	    }
-
-	    if (vehiculoOpt.isEmpty()) {
-	        return ResponseEntity.badRequest().body("El vehículo no existe.");
-	    }
-
-	    vehiculo vehiculo = vehiculoOpt.get();
-	    if (!"disponible".equalsIgnoreCase(vehiculo.getEstado())) {
-	        return ResponseEntity.badRequest().body("El vehículo no está disponible para alquiler.");
-	    }
-
-	    // Calcular valor del alquiler
-	    float valorAlquiler = vehiculo.getValor();
-
-	    // Crear y guardar el nuevo alquiler
-	    alquiler nuevoAlquiler = new alquiler();
-	    nuevoAlquiler.setUsuario(usuarioOpt.get());
-	    nuevoAlquiler.setVehiculo(vehiculo);
-	    nuevoAlquiler.setFechaalquiler(new Date());
-	    nuevoAlquiler.setFechasoli(fechaInicio);
-	    nuevoAlquiler.setFechaentre(fechaEntrega);
-	    nuevoAlquiler.setValoralquiler(valorAlquiler);
-	    nuevoAlquiler.setEstadoalqui("pendiente de entrega");
-
-	    alquiler alquilerGuardado = repositorio.save(nuevoAlquiler);
-
-	    // Actualizar estado del vehículo
-	    vehiculo.setEstado("no disponible");
-	    Repositorio1.save(vehiculo);
-
-	    return ResponseEntity.ok(alquilerGuardado);
-	}
-
-
-
-
-
-	
-	
+        alquiler alquilerGuardado = repositorio.save(nuevoAlquiler);
+        vehiculo.setEstado("no disponible");
+        Repositorio1.save(vehiculo);
+        return ResponseEntity.ok(alquilerGuardado);
+    }
 }
