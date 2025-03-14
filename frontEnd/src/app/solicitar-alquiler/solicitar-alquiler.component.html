@@ -1,0 +1,73 @@
+<div class="container mt-5">
+  <div class="card shadow-lg rounded-4 border-0">
+    <div class="card-header bg-primary text-white text-center py-3">
+      <h3 class="card-title mb-0 fw-bold">🚗 Solicitar Alquiler</h3>
+    </div>
+
+    <div class="card-body p-4">
+      <!-- Tipo de Vehículo -->
+      <div class="row mb-4">
+        <div class="col-md-6">
+          <label class="form-label fw-bold">Tipo de Vehículo:</label>
+          <select class="form-select form-select-lg rounded-3 shadow-sm" [(ngModel)]="tipo" (change)="verDisponibles()">
+            <option value="automovil">🚘 Automóvil</option>
+            <option value="camioneta">🚙 Camioneta</option>
+            <option value="campero">🚜 Campero</option>
+            <option value="microbus">🚌 Microbús</option>
+            <option value="motocicleta">🏍️ Motocicleta</option>
+          </select>
+        </div>
+      </div>
+
+      
+      <div class="row mb-4">
+        <div class="col-md-6">
+          <label class="form-label fw-bold">Seleccione un vehículo:</label>
+          <select class="form-select form-select-lg rounded-3 shadow-sm" [(ngModel)]="placaSeleccionada">
+            <option *ngFor="let vehiculo of vehiculos" [value]="vehiculo.placa">
+              Placa: {{ vehiculo.placa }} - 🎨 {{ vehiculo.color }} - 💰 {{ vehiculo.valor }}$ - Tipo: {{ vehiculo.tipovehiculo }}
+            </option>
+          </select>
+        </div>
+      </div>
+      
+
+    
+      <div class="row mb-4">
+        <div class="col-md-6">
+          <label class="form-label fw-bold">Número de Identificación:</label>
+          <input type="text" class="form-control form-control-lg rounded-3 shadow-sm" [(ngModel)]="nIdentificacion" required />
+        </div>
+      </div>
+
+      <div class="row mb-4">
+        <div class="col-md-3">
+          <label class="form-label fw-bold">Fecha de Inicio:</label>
+          <input type="date" class="form-control form-control-lg rounded-3 shadow-sm" [(ngModel)]="fechaInicio">
+        </div>
+        <div class="col-md-3">
+          <label class="form-label fw-bold">Fecha de Entrega:</label>
+          <input type="date" class="form-control form-control-lg rounded-3 shadow-sm" [(ngModel)]="fechaEntrega">
+        </div>
+      </div>
+
+      <div class="text-center">
+        <button class="btn btn-primary btn-lg px-5 py-2 rounded-pill shadow-sm fw-bold btn-hover"
+                (click)="solicitarAlquiler()">
+          🚀 Solicitar Alquiler
+        </button>
+      </div>
+
+      <div *ngIf="alquilerExitoso" class="text-center mt-4">
+        <button class="btn btn-success btn-lg px-5 py-2 rounded-pill shadow-sm fw-bold btn-hover-green"
+                (click)="generarPDF()">
+          📄 Descargar PDF
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="mensaje" class="alert alert-success mt-4 text-center shadow-lg rounded-3 p-3">
+    {{ mensaje }}
+  </div>
+</div>

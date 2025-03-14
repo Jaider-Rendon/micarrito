@@ -6,23 +6,22 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 
-
 @Component({
   selector: 'app-usuario',
   standalone: true,
-  imports: [CommonModule,FormsModule],
+  imports: [CommonModule, FormsModule],
   templateUrl: './usuario.component.html',
   styleUrl: './usuario.component.css'
 })
 export class UsuarioComponent implements OnInit {
 
-  vehiculos:Vehiculos[];
-  tipo:string;
+  vehiculos: Vehiculos[];
+  tipo: string;
 
-  ngOnInit(): void {
-  }
+  constructor(private vehiculoService: VehiculoService, private router: Router) {}
 
-  constructor(private vehiculoService: VehiculoService, private router:Router) {}
+  ngOnInit(): void {}
+
   verDisponibles() {
     this.vehiculoService.disponibles(this.tipo).subscribe(datos => {
         console.log('Datos recibidos:', datos);
@@ -40,16 +39,18 @@ export class UsuarioComponent implements OnInit {
         alert("Error al obtener los datos. Verifica la conexión con el servidor.");
       }
     );
-}
+  }
 
-veralquileres(){
-  this.router.navigate(['./alquilados'])
- 
-}
-regresar(){
-  this.router.navigate(["./login"])
+  irASolicitarAlquiler() {
+    this.router.navigate(['/solicitar-alquiler']);
+  }
+
+  veralquileres() {
+    this.router.navigate(['./alquilados']);
+  }
+
+  regresar() {
+    this.router.navigate(["./login"]);
+  }
 
 }
-
-}
-
