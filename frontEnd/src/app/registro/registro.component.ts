@@ -33,9 +33,13 @@ export class RegistroComponent implements OnInit {
         alert("Empleado Registrado");
         this.router.navigate(['/login'])
       } else {
-        alert("Registro no guardado");
+        alert("Registro no guardado faltan datos");
       }
     } ,error => {
       alert("error faltan datos");});
+  }
+  regresar(){
+    this.router.navigate(["./navegacion"])
+  
   }
 }

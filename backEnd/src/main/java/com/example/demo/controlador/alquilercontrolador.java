@@ -80,29 +80,21 @@ public class alquilercontrolador {
 	@GetMapping("/cancelarAlqui")
 	public List<Object> cancelar(@RequestParam Long numeroalquiler) {
 	    List<Object> alq = new LinkedList<>();
-	    Optional<alquiler> alquilerOpt = this.repositorio.findById(numeroalquiler);
-
-	    if (alquilerOpt.isPresent()) {
-	        alquiler alquiler = alquilerOpt.get();
-
-	       
-	        if (alquiler.getEstadoalqui().equals("Finalizado")) {
-	            alq.add("No se puede cancelar un alquiler ya finalizado: " + numeroalquiler);
-	            return alq;
-	        }
-
-	        alquiler.getVehiculo().setEstado("disponible");
-
-	        this.repositorio.deleteById(numeroalquiler);
-
-	        alq.add("Ha sido cancelado el alquiler: " + numeroalquiler);
-	        alq.add("Estado del vehículo actualizado a: Disponible");
-	    } else {
-	        alq.add("No se ha encontrado el alquiler: " + numeroalquiler);
+	    List<alquiler> ac=this.repositorio.findAll();
+	    for(int i=0;i<ac.size();i++) {
+	    	Long id=ac.get(i).getNumeroalquiler();
+	    	if(id.equals(numeroalquiler)) {
+	    		ac.get(i).getVehiculo().setEstado("disponible");
+	    		this.repositorio.save(ac.get(i));
+	    		this.repositorio.deleteById(numeroalquiler);
+	    		
+	    	}if(ac.isEmpty()) {
+	    		alq.add("no se encontro ningun alquiler con esta referencia "+numeroalquiler);
+	    	}
 	    }
-
 	    return alq;
-	}
+	    }
+	    
 	
 	
 	@GetMapping("/gestionaralquiler")
@@ -112,35 +104,18 @@ public class alquilercontrolador {
 
 	    if (alquilerOpt.isPresent()) {
 	        alquiler alquiler = alquilerOpt.get();
-
-	       
 	        alquiler.getVehiculo().setEstado("disponible");
-
-	        
 	        Date fechaEntrega = new Date(alquiler.getFechaentre().getTime());
 	        Date fechaActual = new Date();
 	        float valorVehiculo = alquiler.getVehiculo().getValor();
-
-	       
 	        long diferenciaDias = ChronoUnit.DAYS.between(
 	            fechaEntrega.toInstant(), fechaActual.toInstant()
 	        );
-
-	       
 	        float montoAdicional = diferenciaDias * 10000;
-
-	       
 	        float valorTotal = valorVehiculo + montoAdicional;
-
-	      
+	        alquiler.setValoralquiler(valorTotal);
 	        this.repositorio.save(alquiler);
-
-	        
-	        alq.add("Ha sido cambiado el estado del alquiler con ID: " + id);
-	        alq.add("Fecha de entrega: " + fechaEntrega);
-	        alq.add("Diferencia de días: " + diferenciaDias);
-	        alq.add("Monto adicional: " + montoAdicional);
-	        alq.add("Valor total a pagar: " + valorTotal);
+	      
 	    } else {
 	        
 	        alq.add("No se encontró un alquiler con el ID: " + id);
@@ -156,6 +131,11 @@ public class alquilercontrolador {
 	@GetMapping("/todos")
 	public List<alquiler> obtenerTodosLosAlquileres() {
 	    return this.repositorio.findAll();
+	}
+	
+	@GetMapping("/buscaralqui")
+	public List<alquiler> buscaralqui(@RequestParam Long cedula) {
+	    return this.repositorio.findBycedula(cedula);
 	}
 	
 

@@ -32,7 +32,7 @@ public class alquiler {
 	private Date fechaentre;
 	
 	@Column(name="valoralquiler")
-	private Long valoralquiler;
+	private Float valoralquiler;
 	
 	@Column(name="estadoalqui")
 	private String estadoalqui;
@@ -57,7 +57,7 @@ public class alquiler {
 	public alquiler() {
 	}
 
-	public alquiler(Long numeroalquiler, Date fechasoli, Date fechaentre, Long valoralquiler, String estadoalqui,
+	public alquiler(Long numeroalquiler, Date fechasoli, Date fechaentre, Float valoralquiler, String estadoalqui,
 			Date fechaalquiler,vehiculo vehiculo,usuario usuario, loginAdmi loginAdmi) {
 		super();
 		this.numeroalquiler = numeroalquiler;
@@ -95,11 +95,11 @@ public class alquiler {
 		this.fechaentre = fechaentre;
 	}
 
-	public Long getValoralquiler() {
+	public Float getValoralquiler() {
 		return valoralquiler;
 	}
 
-	public void setValoralquiler(Long valoralquiler) {
+	public void setValoralquiler(Float valoralquiler) {
 		this.valoralquiler = valoralquiler;
 	}
 
