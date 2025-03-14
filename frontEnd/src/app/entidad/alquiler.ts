@@ -8,8 +8,8 @@ export class Alquiler {
     fechaentre:Date;
     valoralquiler:number;
     estadoalqui:string;
-    fechaalquiler:string;
-    placa:Vehiculo;
-    nIdentificacion:Usuario;
+    fechaalquiler:Date;
+    vehiculo:Vehiculo;
+    usuario:Usuario;
     loginAdmi:LoginAdmin;
 }

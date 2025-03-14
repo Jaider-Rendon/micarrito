@@ -5,6 +5,7 @@ import { RegistroComponent } from './registro/registro.component';
 import { LoginAdminComponent } from './login-admin/login-admin.component';
 import { UsuarioComponent } from './usuario/usuario.component';
 import { AdministradorComponent } from './administrador/administrador.component';
+import { SolicitarAlquilerComponent } from './solicitar-alquiler/solicitar-alquiler.component';
 
 export const routes: Routes = [
 
@@ -13,6 +14,7 @@ export const routes: Routes = [
     {path: 'usuarios',component:UsuarioComponent },
     {path: 'admins',component:AdministradorComponent },
     {path: 'register', component: RegistroComponent},
+    {path: 'solicitar-alquiler', component: SolicitarAlquilerComponent},
     {path: 'loginAdmin', component: LoginAdminComponent}
 
 ];

@@ -3,6 +3,7 @@ import { VehiculoService } from '../servicio/vehiculo.service';
 import { Vehiculos } from '../entidad/vehiculos';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-usuario',
@@ -19,7 +20,9 @@ export class UsuarioComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  constructor(private vehiculoService: VehiculoService) {}
+  constructor(private vehiculoService: VehiculoService, private router: Router) {}
+
+
   verDisponibles() {
     this.vehiculoService.disponibles(this.tipo).subscribe(datos => {
         console.log('Datos recibidos:', datos);
@@ -38,6 +41,15 @@ export class UsuarioComponent implements OnInit {
       }
     );
 }
+
+
+irASolicitarAlquiler() {
+  this.router.navigate(['/solicitar-alquiler']);
+}
+
+
+
+
 
 }
 

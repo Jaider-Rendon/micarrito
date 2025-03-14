@@ -1,151 +1,132 @@
 package com.example.demo.modelo;
 
 import java.util.Date;
+import jakarta.persistence.*;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
-import jakarta.persistence.Temporal;
-import jakarta.persistence.TemporalType;
-
 @Entity
 @Table(name = "alquiler")
-
 public class alquiler {
-	@Id
-	@Column(name="numeroalquiler")
-	private Long numeroalquiler;
-	
-	@Temporal(TemporalType.DATE)
-	@DateTimeFormat(pattern="MM/dd/yyy")
-	@Column(name="fechasoli",nullable=false)
-	private Date fechasoli;
-	
-	@Temporal(TemporalType.DATE)
-	@DateTimeFormat(pattern="MM/dd/yyy")
-	@Column(name="fechaentre",nullable=false)
-	private Date fechaentre;
-	
-	@Column(name="valoralquiler")
-	private Long valoralquiler;
-	
-	@Column(name="estadoalqui")
-	private String estadoalqui;
-	
-	@Temporal(TemporalType.DATE)
-	@DateTimeFormat(pattern="MM/dd/yyy")
-	@Column(name="fechaalquiler",nullable=false)
-	private Date fechaalquiler;
-	
-	@ManyToOne()
-	@JoinColumn(name = "placa",referencedColumnName="placa")
-	private vehiculo vehiculo;
-	
-	@ManyToOne()
-	@JoinColumn(name = "nIdentificacion",referencedColumnName="nIdentificacion")
-	private usuario usuario;
-	
-	@ManyToOne()
-	@JoinColumn(name = "codigoadmi",referencedColumnName="codigoadmi")
-	private loginAdmi loginAdmi;
+    
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY) // 
+    @Column(name = "numeroalquiler")
+    private Long numeroalquiler;
 
-	public alquiler() {
-	}
+    @Temporal(TemporalType.DATE)
+    @DateTimeFormat(pattern = "MM/dd/yyyy")
+    @Column(name = "fechasoli", nullable = false)
+    private Date fechasoli;
 
-	public alquiler(Long numeroalquiler, Date fechasoli, Date fechaentre, Long valoralquiler, String estadoalqui,
-			Date fechaalquiler,vehiculo vehiculo,usuario usuario, loginAdmi loginAdmi) {
-		super();
-		this.numeroalquiler = numeroalquiler;
-		this.fechasoli = fechasoli;
-		this.fechaentre = fechaentre;
-		this.valoralquiler = valoralquiler;
-		this.estadoalqui = estadoalqui;
-		this.fechaalquiler = fechaalquiler;
-		this.vehiculo = vehiculo;
-		this.usuario = usuario;
-		this.loginAdmi = loginAdmi;
-	}
+    @Temporal(TemporalType.DATE)
+    @DateTimeFormat(pattern = "MM/dd/yyyy")
+    @Column(name = "fechaentre", nullable = false)
+    private Date fechaentre;
 
-	public Long getNumeroalquiler() {
-		return numeroalquiler;
-	}
+    @Column(name = "valoralquiler")
+    private Float valoralquiler;
 
-	public void setNumeroalquiler(Long numeroalquiler) {
-		this.numeroalquiler = numeroalquiler;
-	}
+    @Column(name = "estadoalqui")
+    private String estadoalqui;
 
-	public Date getFechasoli() {
-		return fechasoli;
-	}
+    @Temporal(TemporalType.DATE)
+    @DateTimeFormat(pattern = "MM/dd/yyyy")
+    @Column(name = "fechaalquiler", nullable = false)
+    private Date fechaalquiler;
 
-	public void setFechasoli(Date fechasoli) {
-		this.fechasoli = fechasoli;
-	}
+    @ManyToOne
+    @JoinColumn(name = "placa", referencedColumnName = "placa")
+    private vehiculo vehiculo;
 
-	public Date getFechaentre() {
-		return fechaentre;
-	}
+    @ManyToOne
+    @JoinColumn(name = "nIdentificacion", referencedColumnName = "nIdentificacion")
+    private usuario usuario;
 
-	public void setFechaentre(Date fechaentre) {
-		this.fechaentre = fechaentre;
-	}
+    @ManyToOne
+    @JoinColumn(name = "codigoadmi", referencedColumnName = "codigoadmi")
+    private loginAdmi loginAdmi;
 
-	public Long getValoralquiler() {
-		return valoralquiler;
-	}
+    public alquiler() {
+    }
 
-	public void setValoralquiler(Long valoralquiler) {
-		this.valoralquiler = valoralquiler;
-	}
+    public alquiler(Date fechasoli, Date fechaentre, Float valoralquiler, String estadoalqui,
+                    Date fechaalquiler, vehiculo vehiculo, usuario usuario, loginAdmi loginAdmi) {
+        this.fechasoli = fechasoli;
+        this.fechaentre = fechaentre;
+        this.valoralquiler = valoralquiler;
+        this.estadoalqui = estadoalqui;
+        this.fechaalquiler = fechaalquiler;
+        this.vehiculo = vehiculo;
+        this.usuario = usuario;
+        this.loginAdmi = loginAdmi;
+    }
 
-	public String getEstadoalqui() {
-		return estadoalqui;
-	}
+    public Long getNumeroalquiler() {
+        return numeroalquiler;
+    }
 
-	public void setEstadoalqui(String estadoalqui) {
-		this.estadoalqui = estadoalqui;
-	}
+    public Date getFechasoli() {
+        return fechasoli;
+    }
 
-	public Date getFechaalquiler() {
-		return fechaalquiler;
-	}
+    public void setFechasoli(Date fechasoli) {
+        this.fechasoli = fechasoli;
+    }
 
-	public void setFechaalquiler(Date fechaalquiler) {
-		this.fechaalquiler = fechaalquiler;
-	}
+    public Date getFechaentre() {
+        return fechaentre;
+    }
 
-	public vehiculo getVehiculo() {
-		return vehiculo;
-	}
+    public void setFechaentre(Date fechaentre) {
+        this.fechaentre = fechaentre;
+    }
 
-	public void setVehiculo(vehiculo vehiculo) {
-		this.vehiculo = vehiculo;
-	}
+    public Float getValoralquiler() {
+        return valoralquiler;
+    }
 
-	public usuario getUsuario() {
-		return usuario;
-	}
+    public void setValoralquiler(Float valoralquiler) {
+        this.valoralquiler = valoralquiler;
+    }
 
-	public void setUsuario(usuario usuario) {
-		this.usuario = usuario;
-	}
+    public String getEstadoalqui() {
+        return estadoalqui;
+    }
 
-	public loginAdmi getAdministrador() {
-		return loginAdmi;
-	}
+    public void setEstadoalqui(String estadoalqui) {
+        this.estadoalqui = estadoalqui;
+    }
 
-	public void setAdministrador(loginAdmi loginAdmi) {
-		this.loginAdmi= loginAdmi;
-	}
-	
-	
-	
-	
-	
-	
+    public Date getFechaalquiler() {
+        return fechaalquiler;
+    }
+
+    public void setFechaalquiler(Date fechaalquiler) {
+        this.fechaalquiler = fechaalquiler;
+    }
+
+    public vehiculo getVehiculo() {
+        return vehiculo;
+    }
+
+    public void setVehiculo(vehiculo vehiculo) {
+        this.vehiculo = vehiculo;
+    }
+
+    public usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(usuario usuario) {
+        this.usuario = usuario;
+    }
+
+    public loginAdmi getAdministrador() {
+        return loginAdmi;
+    }
+
+    public void setAdministrador(loginAdmi loginAdmi) {
+        this.loginAdmi = loginAdmi;
+    }
 }

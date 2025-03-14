@@ -1,6 +1,8 @@
 package com.example.demo.controlador;
 
 
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.time.temporal.ChronoUnit;
 import java.util.Date;
 import java.util.LinkedList;
@@ -8,21 +10,25 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
-
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.modelo.alquiler;
-
+import com.example.demo.modelo.usuario;
+import com.example.demo.modelo.vehiculo;
 import com.example.demo.repositorio.alquilerRepositorio;
 import com.example.demo.repositorio.usuarioRepositorio;
 import com.example.demo.repositorio.vehiculoRepositorio;
 
 @RestController
 @RequestMapping("/ver/alquiler/")
+@CrossOrigin(origins = "http://localhost:4200")
 public class alquilercontrolador {
 	
 	@Autowired
@@ -154,5 +160,56 @@ public class alquilercontrolador {
 
 	    return alq;
 	}
+	
+	@PostMapping("/solicitar")
+	public ResponseEntity<?> solicitarAlquiler(
+	        @RequestParam Long nIdentificacion,
+	        @RequestParam String placa,
+	        @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date fechaInicio,
+	        @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date fechaEntrega) {
+
+	    Optional<usuario> usuarioOpt = Repositorio2.findById(nIdentificacion);
+	    Optional<vehiculo> vehiculoOpt = Repositorio1.findById(placa);
+
+	    if (usuarioOpt.isEmpty()) {
+	        return ResponseEntity.badRequest().body("El usuario no existe.");
+	    }
+
+	    if (vehiculoOpt.isEmpty()) {
+	        return ResponseEntity.badRequest().body("El vehículo no existe.");
+	    }
+
+	    vehiculo vehiculo = vehiculoOpt.get();
+	    if (!"disponible".equalsIgnoreCase(vehiculo.getEstado())) {
+	        return ResponseEntity.badRequest().body("El vehículo no está disponible para alquiler.");
+	    }
+
+	    // Calcular valor del alquiler
+	    float valorAlquiler = vehiculo.getValor();
+
+	    // Crear y guardar el nuevo alquiler
+	    alquiler nuevoAlquiler = new alquiler();
+	    nuevoAlquiler.setUsuario(usuarioOpt.get());
+	    nuevoAlquiler.setVehiculo(vehiculo);
+	    nuevoAlquiler.setFechaalquiler(new Date());
+	    nuevoAlquiler.setFechasoli(fechaInicio);
+	    nuevoAlquiler.setFechaentre(fechaEntrega);
+	    nuevoAlquiler.setValoralquiler(valorAlquiler);
+	    nuevoAlquiler.setEstadoalqui("pendiente de entrega");
+
+	    alquiler alquilerGuardado = repositorio.save(nuevoAlquiler);
+
+	    // Actualizar estado del vehículo
+	    vehiculo.setEstado("no disponible");
+	    Repositorio1.save(vehiculo);
+
+	    return ResponseEntity.ok(alquilerGuardado);
+	}
+
+
+
+
+
+	
 	
 }
