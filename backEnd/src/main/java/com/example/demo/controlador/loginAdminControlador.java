@@ -12,7 +12,7 @@ import com.example.demo.repositorio.loginAdmiRepositorio;
 
 @RestController
 @RequestMapping("/login/admin")
-@CrossOrigin(origins = "http://localhost:4200/")
+@CrossOrigin(origins = "http://localhost:4200")
 public class loginAdminControlador {
 
 	@Autowired 

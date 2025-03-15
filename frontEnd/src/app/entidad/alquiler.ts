@@ -8,8 +8,8 @@ export class Alquiler {
     fechaentre: Date;
     valoralquiler: number;
     estadoalqui: string;
-    fechaalquiler: Date;  // O cambiar a string si así lo necesitas
-    vehiculo: Vehiculos;  // Verifica el nombre correcto de la clase
+    fechaalquiler: Date; 
+    vehiculo: Vehiculos;  
     usuario: Usuario;
     loginAdmi: LoginAdmin;
 }

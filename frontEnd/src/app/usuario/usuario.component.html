@@ -1,21 +1,18 @@
-
 <div class="container mt-4 text-center">
   <h2>👤 Bienvenido, Usuario</h2>
-
   <button class="btn btn-primary mt-3" (click)="irASolicitarAlquiler()">
     🚗 Solicitar Alquiler
   </button>
 </div>
 
+<!-- Título de la lista de vehículos -->
+<p class="h3 text-primary text-center mt-4">🚗 Lista de Vehículos</p>
 
-
-
-<p class="h3 text-primary text-center mt-3">🚗 Lista de Vehículos</p>
-
+<!-- Botones de navegación -->
 <div class="container mt-3">
   <div class="row align-items-center">
     <div class="col-md-4 text-start">
-      <button class="btn btn-info" (click)="regresar()">🔙 </button>
+      <button class="btn btn-info" (click)="regresar()">🔙</button>
     </div>
     <div class="col-md-4 text-center">
       <button class="btn btn-primary" (click)="veralquileres()">📋 Ver tus alquileres</button>
@@ -24,10 +21,11 @@
   </div>
 </div>
 
+<!-- Filtro por tipo de vehículo -->
 <div class="container mt-4">
   <div class="row justify-content-center">
     <div class="col-md-6">
-      <label for="tipo" class="form-label fw-bold">Tipo de Vehículo:</label> 
+      <label for="tipo" class="form-label fw-bold">Tipo de Vehículo:</label>
       <select class="form-select shadow-sm" [(ngModel)]="tipo" (change)="verDisponibles()">
         <option value="automovil">🚘 Automóvil</option>
         <option value="camioneta">🚙 Camioneta</option>
@@ -39,6 +37,7 @@
   </div>
 </div>
 
+<!-- Tabla de vehículos disponibles -->
 <div class="container mt-4">
   <div class="table-responsive">
     <table class="table table-hover table-bordered shadow-sm">

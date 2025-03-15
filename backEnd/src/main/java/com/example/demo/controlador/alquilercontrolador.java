@@ -109,7 +109,7 @@ public class alquilercontrolador {
             );
             float montoAdicional = diferenciaDias * 10000;
             float valorTotal = valorVehiculo + montoAdicional;
-            alquiler.setValoralquiler(valorTotal);
+            alquiler.setvaloralquiler(valorTotal);
             this.repositorio.save(alquiler);
         } else {
             alq.add("No se encontró un alquiler con el ID: " + id);
@@ -161,7 +161,7 @@ public class alquilercontrolador {
         nuevoAlquiler.setFechaalquiler(new Date());
         nuevoAlquiler.setFechasoli(fechaInicio);
         nuevoAlquiler.setFechaentre(fechaEntrega);
-        nuevoAlquiler.setValoralquiler(vehiculo.getValor());
+        nuevoAlquiler.setvaloralquiler(vehiculo.getValor().floatValue());
         nuevoAlquiler.setEstadoalqui("pendiente de entrega");
 
         alquiler alquilerGuardado = repositorio.save(nuevoAlquiler);

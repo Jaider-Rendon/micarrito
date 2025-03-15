@@ -6,7 +6,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 @Table(name = "alquiler")
-public class Alquiler {
+public class alquiler {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -36,23 +36,23 @@ public class Alquiler {
 
     @ManyToOne
     @JoinColumn(name = "placa", referencedColumnName = "placa")
-    private Vehiculo vehiculo;
+    private vehiculo vehiculo;
 
     @ManyToOne
     @JoinColumn(name = "nIdentificacion", referencedColumnName = "nIdentificacion")
-    private Usuario usuario;
+    private usuario usuario;
 
     @ManyToOne
     @JoinColumn(name = "codigoadmi", referencedColumnName = "codigoadmi")
-    private LoginAdmi loginAdmi;
+    private loginAdmi loginAdmi;
 
     // Constructor vacío
-    public Alquiler() {
+    public alquiler() {
     }
 
     // Constructor con parámetros
-    public Alquiler(Long numeroalquiler, Date fechasoli, Date fechaentre, Float valoralquiler, String estadoalqui,
-                    Date fechaalquiler, Vehiculo vehiculo, Usuario usuario, LoginAdmi loginAdmi) {
+    public alquiler(Long numeroalquiler, Date fechasoli, Date fechaentre, Float valoralquiler, String estadoalqui,
+                    Date fechaalquiler, vehiculo vehiculo, usuario usuario, loginAdmi loginAdmi) {
         this.numeroalquiler = numeroalquiler;
         this.fechasoli = fechasoli;
         this.fechaentre = fechaentre;
@@ -89,11 +89,11 @@ public class Alquiler {
         this.fechaentre = fechaentre;
     }
 
-    public Float getValoralquiler() {
+    public Float getvaloralquiler() {
         return valoralquiler;
     }
 
-    public void setValoralquiler(Float valoralquiler) {
+    public void setvaloralquiler(Float valoralquiler) {
         this.valoralquiler = valoralquiler;
     }
 
@@ -113,27 +113,27 @@ public class Alquiler {
         this.fechaalquiler = fechaalquiler;
     }
 
-    public Vehiculo getVehiculo() {
+    public vehiculo getVehiculo() {
         return vehiculo;
     }
 
-    public void setVehiculo(Vehiculo vehiculo) {
+    public void setVehiculo(vehiculo vehiculo) {
         this.vehiculo = vehiculo;
     }
 
-    public Usuario getUsuario() {
+    public usuario getUsuario() {
         return usuario;
     }
 
-    public void setUsuario(Usuario usuario) {
+    public void setUsuario(usuario usuario) {
         this.usuario = usuario;
     }
 
-    public LoginAdmi getLoginAdmi() {
+    public loginAdmi getLoginAdmi() {
         return loginAdmi;
     }
 
-    public void setLoginAdmi(LoginAdmi loginAdmi) {
+    public void setLoginAdmi(loginAdmi loginAdmi) {
         this.loginAdmi = loginAdmi;
     }
 }

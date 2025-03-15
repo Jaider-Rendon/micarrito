@@ -21,11 +21,6 @@ public class vehiculocontrolador {
 	@Autowired
 	private vehiculoRepositorio repositorio;
 	
-
-	
-	
-	
-	
 	@GetMapping("/buscartipodisponible")
 	public List<vehiculo> Disponinble(@RequestParam String tipo){
 		return repositorio.findByEstado("disponible", tipo);
