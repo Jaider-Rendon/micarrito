@@ -15,7 +15,7 @@ import com.example.demo.repositorio.usuarioRepositorio;
 
 @RestController
 @RequestMapping("/login/usuario")
-@CrossOrigin(origins = "http://localhost:4200/")
+@CrossOrigin(origins = "http://localhost:4200")
 public class loginUsuarioControlador {
 
 	
