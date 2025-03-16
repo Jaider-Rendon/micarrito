@@ -19,6 +19,7 @@ export class UsuarioComponent implements OnInit {
   tipo: string;
 
   constructor(private vehiculoService: VehiculoService, private router: Router) {}
+  
 
   ngOnInit(): void {}
 

@@ -13,7 +13,7 @@ import { Router } from '@angular/router';
 })
 export class AlquilerComponent implements OnInit {
 
-  ver: boolean = false; // Inicializado en false para evitar errores
+  ver: boolean = false;
   alquiler: Alquiler[] = []; 
 
   constructor(private administradorService: AdministradorService,private router:Router) {}
@@ -35,7 +35,6 @@ export class AlquilerComponent implements OnInit {
 
   actualizar(placa: string) {
     this.administradorService.gestionar(placa).subscribe(dato => {
-      alert(dato);
       console.log(dato);
       window.location.reload();
     });

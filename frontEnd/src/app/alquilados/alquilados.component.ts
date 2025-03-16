@@ -21,17 +21,21 @@ export class AlquiladosComponent {
 
 
  verDisponibles() {
-  this.administradorService.buscar(this.cedula).subscribe( 
-    (datos) => {
-      console.log('Datos recibidos:', datos);
-      this.alquiler = Array.isArray(datos) ? datos : [datos];
+  console.log("Buscando alquileres para cédula:", this.cedula);
+  this.administradorService.buscar(this.cedula).subscribe({
+    next: (datos) => {
+      console.log("Datos recibidos:", datos);
+      this.alquiler = Array.isArray(datos) ? datos : datos ? [datos] : [];
+      if (this.alquiler.length === 0) {
+        alert("No hay alquileres con esta cédula");
+      }
     },
-    (error) => {
+    error: (error) => {
+      console.error("Error al obtener alquileres:", error);
     }
-  );
-
-
+  });
 }
+
 cancelar(idAl:number){
   this.administradorService.cancelar(idAl).subscribe(dato=>{
     this.verDisponibles()

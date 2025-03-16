@@ -25,7 +25,7 @@ export class AdministradorService {
   gestionar(
     placa:string
   ):Observable<any>{
-return this.httpClient.get(`http://localhost:8080/ver/alquiler/actualizar?placa=${placa}`)
+  return this.httpClient.get(`http://localhost:8080/ver/alquiler/actualizar?placa=${placa}`)
   }
 
   calcular(
