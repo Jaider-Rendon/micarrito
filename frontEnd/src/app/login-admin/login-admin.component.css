@@ -1,32 +1,78 @@
 .login-container {
-    width: 300px;
-    margin: 50px auto;
-    padding: 20px;
-    background: white;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    border-radius: 8px;
-    text-align: center;
+  position: relative;
+  width: 320px;
+  margin: 50px auto;
+  padding: 20px;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+
+.back-btn {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  padding: 6px 10px;
+  font-size: 14px;
+  background: #17a2b8;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.back-btn:hover {
+  background: #138496;
+}
+
+input {
+  width: calc(100% - 20px);
+  padding: 10px;
+  margin: 10px 0;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 14px;
+}
+
+
+.form-group {
+  margin-bottom: 15px;
+  text-align: left;
+}
+
+.login-btn {
+  width: 100%;
+  padding: 10px;
+  background: #28a745;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.login-btn:hover {
+  background: #218838;
+}
+
+button:disabled {
+  background: #ccc;
+  cursor: not-allowed;
+}
+
+@media (max-width: 400px) {
+  .login-container {
+      width: 90%;
   }
-  
-  input {
-    width: 100%;
-    padding: 10px;
-    margin: 8px 0;
-    border: 1px solid #ccc;
-    border-radius: 5px;
+
+  .back-btn {
+      font-size: 12px;
+      padding: 5px 8px;
   }
-  
-  button {
-    width: 100%;
-    padding: 10px;
-    background: #28a745;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-  
-  button:disabled {
-    background: #ccc;
-  }
-  
+}

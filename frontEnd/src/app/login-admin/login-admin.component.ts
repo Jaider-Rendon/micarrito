@@ -47,7 +47,7 @@ loginAdminForm: FormGroup;
 
     
   }
-
-
-
+  regresar(){
+    this.router.navigate(['./login'])
+  }
 }

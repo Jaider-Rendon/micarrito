@@ -50,4 +50,7 @@ export class LoginComponent implements OnInit {
       }
     );
   }
+  regresar(){
+    this.router.navigate(['./admins'])
+  }
 }
