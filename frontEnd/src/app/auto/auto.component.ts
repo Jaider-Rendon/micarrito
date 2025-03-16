@@ -23,7 +23,7 @@ export class AutoComponent implements OnInit {
 
   constructor(private vehiculoService: VehiculoService, private router:Router) {}
   verDisponibles() {
-    this.vehiculoService.disponibless(this.tipo).subscribe(datos => {
+    this.vehiculoService.disponibles(this.tipo).subscribe(datos => {
         console.log('Datos recibidos:', datos);
 
         if (!datos || (Array.isArray(datos) && datos.length === 0)) {

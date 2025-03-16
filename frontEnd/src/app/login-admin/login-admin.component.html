@@ -1,12 +1,19 @@
 <div class="login-container">
-    <h2>Iniciar Sesión Administrador</h2>
-    <form [formGroup]="loginForm">
-      <label for="usuario">Usuario:</label>
-      <input type="text" id="usuario" formControlName="usuario" required>
-  
-      <label for="clavead">Contraseña:</label>
-      <input type="password" id="clavead" formControlName="clavead" required>
-  
-      <button type="button" (click)="validarLoginAd()">Ingresar</button>
-    </form>
-  </div>
+  <button class="btn btn-info back-btn" (click)="regresar()">🔙</button>
+
+  <h2>Iniciar Sesión Administrador</h2>
+
+  <form [formGroup]="loginForm" class="login-form">
+      <div class="form-group">
+          <label for="usuario">Usuario:</label>
+          <input type="text" id="usuario" formControlName="usuario" placeholder="Ingrese su usuario" required>
+      </div>
+
+      <div class="form-group">
+          <label for="clavead">Contraseña:</label>
+          <input type="password" id="clavead" formControlName="clavead" placeholder="Ingrese su contraseña" required>
+      </div>
+
+      <button type="button" class="btn btn-primary login-btn" (click)="validarLoginAd()">Ingresar</button>
+  </form>
+</div>
