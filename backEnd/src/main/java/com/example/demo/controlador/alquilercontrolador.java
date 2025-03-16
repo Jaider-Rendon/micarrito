@@ -60,20 +60,22 @@ public class alquilercontrolador {
     @GetMapping("/actualizar")
     public List<Object> Actualizar(@RequestParam String placa) {
         List<Object> alqA = new LinkedList<>();
-        List<alquiler> Ac = this.repositorio.findAll();
+        
+       
+        List<alquiler> Ac = this.repositorio.findByVehiculoPlaca(placa);
 
-        for (int i = 0; i < Ac.size(); i++) {
-            String Placa = Ac.get(i).getVehiculo().getPlaca();
-            if (Placa.equals(placa)) {
-                Ac.get(i).setEstadoalqui("entregado");
-                this.repositorio.save(Ac.get(i));
-                return alqA;
-            } else {
-                alqA.add("No se encontraron vehículos relacionados con la placa: " + placa);
+        if (!Ac.isEmpty()) {
+            for (alquiler a : Ac) {
+                a.setEstadoalqui("entregado");
+                this.repositorio.save(a);
             }
+            return alqA;
         }
+
+        alqA.add("No se encontraron vehículos relacionados con la placa: " + placa);
         return alqA;
     }
+
     
     @GetMapping("/cancelarAlqui")
     public List<Object> cancelar(@RequestParam Long numeroalquiler) {

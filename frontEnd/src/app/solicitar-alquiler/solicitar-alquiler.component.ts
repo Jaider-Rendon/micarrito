@@ -7,6 +7,7 @@ import jsPDF from 'jspdf';
 import { Alquiler } from '../entidad/alquiler';
 import { Usuario } from '../entidad/usuario';
 import { Vehiculos } from '../entidad/vehiculos';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-solicitar-alquiler',
@@ -27,7 +28,7 @@ export class SolicitarAlquilerComponent implements OnInit {
   alquilerExitoso: boolean = false;
   usuario: Usuario[] = [];
 
-  constructor(private vehiculoService: VehiculoService, private alquilerService: AlquilerService) {}
+  constructor(private vehiculoService: VehiculoService, private alquilerService: AlquilerService,private router:Router) {}
 
   ngOnInit(): void {}
 
@@ -63,7 +64,7 @@ export class SolicitarAlquilerComponent implements OnInit {
         alert("Alquiler solicitado con éxito.");
       },
       error => {
-        alert("Error al solicitar el alquiler: " + error.error);
+        alert("error alquiler ya fue solicitado" );
       }
     );
   }
@@ -117,5 +118,8 @@ export class SolicitarAlquilerComponent implements OnInit {
     });
 
     doc.save('alquiler.pdf');
+  }
+  regresar() {
+    this.router.navigate(["./usuarios"]);
   }
 }

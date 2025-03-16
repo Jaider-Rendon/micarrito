@@ -26,5 +26,10 @@ public class vehiculocontrolador {
 		return repositorio.findByEstado("disponible", tipo);
 	}
 	
+	@GetMapping("/buscartipodisponiblee")
+	public List<vehiculo> Disponinbles(@RequestParam String tipo){
+		return repositorio.findByEstados(tipo);
+	}
+	
 	
 }
