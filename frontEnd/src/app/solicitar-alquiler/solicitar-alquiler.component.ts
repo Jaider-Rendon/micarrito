@@ -64,7 +64,7 @@ export class SolicitarAlquilerComponent implements OnInit {
         alert("Alquiler solicitado con éxito.");
       },
       error => {
-        alert("error alquiler ya fue solicitado" );
+        alert("error numero de cedula no reconocido" );
       }
     );
   }
